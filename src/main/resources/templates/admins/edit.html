@@ -1,0 +1,45 @@
+<div th:replace="~{home/shared/header}"></div>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Edit Administrator</h1>
+    <p class="mb-4">Idasoidjasiodjasidajsiodjas</p>
+
+    <div class="card shadow mb-4" style="padding: 30px">
+        <form method="POST" th:ation="@{'/admins/' + ${admin.id} + '/edit'}" 
+            onsubmit="return confirm('Edit user with this information?')">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter name"
+                    th:value="${admin.name}" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+                    placeholder="Enter email" th:value="${admin.email}" required />
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                    else.</small>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                    th:value="${admin.password}"
+                    required />
+            </div>
+            <div class="form-group">
+                <label for="comment">Comment</label>
+                <textarea class="form-control" id="comment" name="comment" placeholder="Your comment"
+                    th:value="${admin.comment}"></textarea>
+            </div>
+            <!-- <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div> -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+<!-- /.container-fluid -->
+
+<div th:replace="~{home/shared/footer}"></div>

@@ -55,7 +55,7 @@
             <tr th:each="admin : ${admins}">
               <td th:text="${admin.name}"></td>
               <td th:text="${admin.email}"></td>
-              <td><a href="#" class="btn btn-warning">Alterar</a></td>
+              <td><a th:href="@{'/admins/' + ${admin.id}}" class="btn btn-warning">Alterar</a></td>
               <td>
                 <a
                   href="#"

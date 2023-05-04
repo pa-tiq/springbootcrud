@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.dantas.springbootcrud.repository.AdminsRepo;
 import com.dantas.springbootcrud.models.Admin;
@@ -26,7 +27,7 @@ public class AdminsController {
     }
 
     @GetMapping("/admins/new")
-    public String newAdmin() {
+    public String newAdminScreen() {
         return "admins/new";
     }
 
@@ -37,9 +38,16 @@ public class AdminsController {
     }
 
     @GetMapping("/admins/{id}/delete")
-    public String create(@PathVariable int id) {
+    public String delete(@PathVariable int id) {
         adminsrepo.deleteById(id);
         return "redirect:/admins";
+    }
+
+    @GetMapping("/admins/{id}")
+    public String edit(@PathVariable int id, Model model) {
+        Optional<Admin> admin = adminsrepo.findById(id);
+        model.addAttribute("admin", admin.get());
+        return "admins/edit";
     }
 
 }
