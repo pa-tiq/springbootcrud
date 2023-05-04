@@ -21,7 +21,9 @@
       >
         Administrators
       </h6>
-      <a href="/admins/new" class="btn btn-primary" style="margin-left: 3rem">New</a>
+      <a href="/admins/new" class="btn btn-primary" style="margin-left: 3rem"
+        >New</a
+      >
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -54,7 +56,14 @@
               <td th:text="${admin.name}"></td>
               <td th:text="${admin.email}"></td>
               <td><a href="#" class="btn btn-warning">Alterar</a></td>
-              <td><a href="#" class="btn btn-danger">Excluir</a></td>
+              <td>
+                <a
+                  href="#"
+                  th:onclick="'if(confirm(\'Are you sure you want to delete this admin?\')){ window.location.href=\'' + @{/admins/{id}(id=${admin.id})} + '/delete\' } '"
+                  class="btn btn-danger"
+                  >Excluir</a
+                >
+              </td>
             </tr>
           </tbody>
         </table>
