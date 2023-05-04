@@ -57,7 +57,8 @@ public class AdminsController {
 
     @PostMapping("/admins/{id}/edit")
     public String editAction(@PathVariable int id, Admin admin) {
-        if (adminsrepo.existsById(id)) {
+        // já existe o método existById, mas criei esse só pra aprender como faz
+        if (adminsrepo.exist(id)) {
             adminsrepo.save(admin);
             return "redirect:/admins";
         }
