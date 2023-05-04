@@ -17,7 +17,7 @@ public class Admin {
     private int id;
 
     @Column(length = 100, nullable = false)
-    private String nome;
+    private String name;
 
     @Column(length = 180, nullable = false)
     private String email;
@@ -28,13 +28,6 @@ public class Admin {
     @Column(length = 65535)
     private String comment;
 
-    public Admin(int id, String nome, String email, String password) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.password = password;
-    }
-
     public int getId() {
         return id;
     }
@@ -43,12 +36,12 @@ public class Admin {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -65,6 +58,14 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
 };

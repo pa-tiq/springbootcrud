@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -26,6 +27,12 @@ public class AdminsController {
     @GetMapping("/admins/new")
     public String newAdmin() {
         return "admins/new";
+    }
+
+    @PostMapping("/admins/create")
+    public String create(Admin admin) {
+        adminsrepo.save(admin);
+        return "redirect:/admins";
     }
 
 }
