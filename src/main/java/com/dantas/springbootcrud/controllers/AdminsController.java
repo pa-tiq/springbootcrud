@@ -27,27 +27,40 @@ public class AdminsController {
     }
 
     @GetMapping("/admins/new")
-    public String newAdminScreen() {
+    public String createScreen() {
         return "admins/new";
     }
 
     @PostMapping("/admins/create")
-    public String create(Admin admin) {
+    public String createAction(Admin admin) {
         adminsrepo.save(admin);
         return "redirect:/admins";
     }
 
     @GetMapping("/admins/{id}/delete")
-    public String delete(@PathVariable int id) {
+    public String deleteAction(@PathVariable int id) {
         adminsrepo.deleteById(id);
         return "redirect:/admins";
     }
 
     @GetMapping("/admins/{id}")
-    public String edit(@PathVariable int id, Model model) {
+    public String editScreen(@PathVariable int id, Model model) {
         Optional<Admin> admin = adminsrepo.findById(id);
-        model.addAttribute("admin", admin.get());
+        try {
+            model.addAttribute("admin", admin.get());
+
+        } catch (Exception e) {
+            return "redirect:/admins";
+        }
         return "admins/edit";
     }
 
+    @PostMapping("/admins/{id}/edit")
+    public String editAction(@PathVariable int id, Admin admin) {
+        if (adminsrepo.existsById(id)) {
+            adminsrepo.save(admin);
+            return "redirect:/admins";
+        }
+        return "admins/edit";
+    }
 }

@@ -7,7 +7,7 @@
     <p class="mb-4">Idasoidjasiodjasidajsiodjas</p>
 
     <div class="card shadow mb-4" style="padding: 30px">
-        <form method="POST" th:ation="@{'/admins/' + ${admin.id} + '/edit'}" 
+        <form method="POST" th:action="@{'/admins/' + ${admin.id} + '/edit'}" 
             onsubmit="return confirm('Edit user with this information?')">
             <div class="form-group">
                 <label for="name">Name</label>
@@ -30,7 +30,7 @@
             <div class="form-group">
                 <label for="comment">Comment</label>
                 <textarea class="form-control" id="comment" name="comment" placeholder="Your comment"
-                    th:value="${admin.comment}"></textarea>
+                    th:inline="text">[[${admin.comment}]]</textarea>
             </div>
             <!-- <div class="form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1" />
