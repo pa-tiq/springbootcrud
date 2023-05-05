@@ -1,5 +1,7 @@
 package com.dantas.springbootcrud.controllers;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,14 +26,27 @@ public class LoginController {
     }
 
     @PostMapping(value = "/login")
-    public String loginAction(Model model, Admin user, HttpServletResponse response) {
+    public String loginAction(Model model, Admin user, String remember, HttpServletResponse response)
+            throws UnsupportedEncodingException {
         Admin admin = adminsrepo.login(user.getEmail(), user.getPassword());
         if (admin != null) {
-            CookieService.setCookie(response, "userId", String.valueOf(admin.getId()), 60);
+            int timeLoggedIn = 60;
+            if (remember != null) {
+                timeLoggedIn = 60 * 60 * 24 * 365;
+            }
+            CookieService.setCookie(response, "userId", String.valueOf(admin.getId()), timeLoggedIn);
+            CookieService.setCookie(response, "name", admin.getName(), timeLoggedIn);
             return "redirect:/";
         }
         model.addAttribute("error", "Invalid user or password");
         return "login/index";
+    }
+
+    @GetMapping(value = "/logout")
+    public String logoutAction(HttpServletResponse response) throws UnsupportedEncodingException {
+        CookieService.setCookie(response, "userId", "", 0);
+        CookieService.setCookie(response, "name", "", 0);
+        return "redirect:/login";
     }
 
 }
